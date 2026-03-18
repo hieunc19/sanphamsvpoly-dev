@@ -15,7 +15,7 @@ class AdminController extends Controller
     public function index(){
         $user=User::role('giao_vu')->get();
         $user->load('user_campus');
-        return view('Admin.EducationalAffairs.view',compact('user'));
+        return view('admin.educational-affairs.view',compact('user'));
     }
     
     public function disable($id){
@@ -27,7 +27,7 @@ class AdminController extends Controller
         
      
             $campus=Campus::get();
-            return view('Admin.EducationalAffairs.add',compact('campus'));
+            return view('admin.educational-affairs.add',compact('campus'));
         
     }
     public function add(Request $request){
@@ -61,7 +61,7 @@ class AdminController extends Controller
     public function editForm($id){
         $user=User::find($id);
         $campus=Campus::get();
-        return view('Admin.EducationalAffairs.edit',compact('user','id','campus'));
+        return view('admin.educational-affairs.edit',compact('user','id','campus'));
 
     }
     public function edit(Request $request,$id){

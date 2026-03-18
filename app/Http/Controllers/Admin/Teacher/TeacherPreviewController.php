@@ -33,7 +33,7 @@ class TeacherPreviewController extends Controller
         
 
         $product->appends($request->except('_token'));
-        return view('Admin.teacher.preview',compact('product'));
+        return view('admin.teacher.preview',compact('product'));
     }
 
     public function evaluate($productId){
@@ -42,7 +42,7 @@ class TeacherPreviewController extends Controller
         $subject = Subject::where('code', $product->code_subject)->first();
         $attributes = $subject->attributes;
         $productEvaluate = ProductEvaluate::where('product_id', $productId)->get();
-        return view('Admin.teacher.evaluate', compact('product', 'attributes', 'productEvaluate'));
+        return view('admin.teacher.evaluate', compact('product', 'attributes', 'productEvaluate'));
     }
 
     public function ajaxpreview(Request $request){
@@ -113,7 +113,7 @@ class TeacherPreviewController extends Controller
         $products->appends($request->except('_token'));
         $majorhead=MajorsHeadTeacher::get();
         $majorhead->load('major_obj');
-        return view('Admin.teacher.finalpreview',compact('products','majorhead'));
+        return view('admin.teacher.finalpreview',compact('products','majorhead'));
     }
     public function Finalaccept($id){
         $product=Product::find($id);
@@ -148,7 +148,7 @@ class TeacherPreviewController extends Controller
         $contents = "https://drive.google.com/file/d/".$matches[1][0]."/preview";
         $major=Majors::get();
         $product->load('product_gallery','member_obj','semester_obj','subject_obj');
-        return view('Admin.teacher.demo',compact('product','major','contents'));
+        return view('admin.teacher.demo',compact('product','major','contents'));
     }
     public function del($id){
         $product=Product::find($id);

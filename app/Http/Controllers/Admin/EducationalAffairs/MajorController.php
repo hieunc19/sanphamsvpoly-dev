@@ -27,7 +27,7 @@ class MajorController extends Controller
 
         $teacher = MajorsHeadTeacher::get();
         $user = User::get();
-        return view('Admin.major.view', compact('major', 'teacher', 'user', 'auth'));
+        return view('admin.major.view', compact('major', 'teacher', 'user', 'auth'));
     }
     public function editForm($id)
     {
@@ -43,7 +43,7 @@ class MajorController extends Controller
             $teacher = preg_replace("/@fpt.edu.vn/", "", $email);
         }
 
-        return view('Admin.major.edit', compact('major', 'teacher', 'auth'));
+        return view('admin.major.edit', compact('major', 'teacher', 'auth'));
     }
     public function edit(Request $request, $id)
     {
@@ -116,7 +116,7 @@ class MajorController extends Controller
                 }
             }
         }
-        return view('Admin.major.edit', compact('major', 'head_teachers', 'teacher', 'auth', 'campus','main_major'));
+        return view('admin.major.edit', compact('major', 'head_teachers', 'teacher', 'auth', 'campus','main_major'));
     }
     public function AdminEdit(Request $request, $id)
     {
@@ -183,7 +183,7 @@ class MajorController extends Controller
     {   
         $main_major=MainMajors::get();
         $campus = Campus::where('id', '>', 1)->get();
-        return view('Admin.major.add', compact('campus','main_major'));
+        return view('admin.major.add', compact('campus','main_major'));
     }
     public function add(Request $request)
     {
