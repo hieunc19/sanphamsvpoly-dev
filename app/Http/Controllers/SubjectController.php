@@ -18,7 +18,7 @@ class SubjectController extends Controller
         $subject->appends($request->except('_token'));
 
         $major=Majors::get();
-        return view('Admin.subject.view',compact('subject','major', 'searchValue'));
+        return view('admin.subject.view',compact('subject','major', 'searchValue'));
         
     }
     
@@ -26,7 +26,7 @@ class SubjectController extends Controller
         $subject=Subject::find($id);
         $subject->load('attributes');
         $major=Majors::get();
-        return view('Admin.subject.edit',compact('subject','major'));
+        return view('admin.subject.edit',compact('subject','major'));
     }
     public function edit(Request $request,$id){
         $request->validate([
@@ -65,7 +65,7 @@ class SubjectController extends Controller
     }
     public function addForm(){
         $major=Majors::get();
-        return view('Admin.subject.add',compact('major'));
+        return view('admin.subject.add',compact('major'));
     }
     public function add(Request $request){
         $request->validate([
@@ -120,7 +120,7 @@ class SubjectController extends Controller
 
     }
     public function ExcelAddForm(){
-        return view('Admin.subject.exceladd');
+        return view('admin.subject.exceladd');
     }
     public function ExcelAdd(Request $request){
             

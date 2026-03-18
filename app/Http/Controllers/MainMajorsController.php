@@ -13,10 +13,10 @@ class MainMajorsController extends Controller
         $searchValue = $request->has('search_value') ? $request->search_value : "";
         $main_major = MainMajors::where('name', 'like', "%$request->search_value%")->paginate(10);
         $main_major->appends($request->except('_token'));
-        return view('Admin.mainmajor.view', compact('main_major','searchValue'));
+        return view('admin.mainmajor.view', compact('main_major','searchValue'));
     }
     public function addForm(){
-        return view('Admin.mainmajor.add');
+        return view('admin.mainmajor.add');
     }
     public function add(Request $request){
         $request->validate([
@@ -38,7 +38,7 @@ class MainMajorsController extends Controller
     }
     public function editForm($id){
         $main_major=MainMajors::find($id);
-        return view('Admin.mainmajor.edit',compact('main_major'));
+        return view('admin.mainmajor.edit',compact('main_major'));
     }
     public function edit(Request $request,$id){
         $request->validate([
