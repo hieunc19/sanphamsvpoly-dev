@@ -5,7 +5,7 @@
 @section('style-page')
 @endsection
 @section('content')
-    <div class="major__page">
+    <div class="major__page see-more-page">
         <div class="container">
             <div class="major__content__title">
                 <div class="content__title__left">
