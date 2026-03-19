@@ -3984,4 +3984,23 @@ span {
     }
 }
 
+@media (min-width: 1201px) and (max-width: 1440px) {
+    .header-main .navbar .navbar-wrap > li {
+        margin-left: 1rem;
+    }
+    .header-main .navbar .navbar-wrap {
+        grid-gap: 5px;
+    }
+    .header-main header .content .search {
+        margin-left: 1rem;
+    }
+    .header-main .content .btn-account {
+        margin-left: 1rem;
+        padding-left: 1rem;
+    }
+    .header-main .navbar .navbar-wrap > li > a {
+        font-size: 0.8rem;
+    }
+}
+
 /* ======== end ====== */

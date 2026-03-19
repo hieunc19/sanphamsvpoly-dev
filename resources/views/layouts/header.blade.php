@@ -62,7 +62,7 @@ use Illuminate\Support\Str;
                     <div class="btn-account">
                         @if (Auth::check())
                         <div class="dropdown">
-                            <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="rounded-circle" href="{{ auth()->user()->hasAnyRole(['teacher', 'major_head_teacher', 'admin', 'giao_vu']) ? route('dashboard') : '#' }}" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="avatar">
                                     <img alt="avatar" src="{{ Auth::user()->avatar }}" class="rounded-circle">
                                 </div>
@@ -78,6 +78,12 @@ use Illuminate\Support\Str;
                                     </div>
                                 </div>
                                 <div class="btn-logout">
+                                    @if(auth()->user()->hasAnyRole(['teacher', 'major_head_teacher', 'admin', 'giao_vu']))
+                                    <a href="{{ route('dashboard') }}" class="mb-2">
+                                        <i class="fas fa-user-shield"></i>
+                                        Trang quản trị
+                                    </a>
+                                    @endif
                                     <a href="/logout">
                                         <i class="fas fa-sign-out-alt"></i>
                                         Sign Out
@@ -107,7 +113,7 @@ use Illuminate\Support\Str;
                     <div class="group-btn">
                         @if (Auth::check())
                         <div class="dropdown">
-                            <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="rounded-circle" href="{{ auth()->user()->hasAnyRole(['teacher', 'major_head_teacher', 'admin', 'giao_vu']) ? route('dashboard') : '#' }}" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="avatar">
                                     <img alt="avatar" src="{{ Auth::user()->avatar }}" class="rounded-circle">
                                 </div>
@@ -123,6 +129,12 @@ use Illuminate\Support\Str;
                                     </div>
                                 </div>
                                 <div class="btn-logout">
+                                    @if(auth()->user()->hasAnyRole(['teacher', 'major_head_teacher', 'admin', 'giao_vu']))
+                                    <a href="{{ route('dashboard') }}" class="mb-2">
+                                        <i class="fas fa-user-shield"></i>
+                                        Trang quản trị
+                                    </a>
+                                    @endif
                                     <a href="/logout">
                                         <i class="fas fa-sign-out-alt"></i>
                                         Sign Out
