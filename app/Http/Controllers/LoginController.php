@@ -16,22 +16,37 @@ class LoginController extends Controller
     }
 
     public function redirectGGAuth(){
-        return Socialite::driver('google')->stateless()->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function ggAuthCallback(){
-        $ggUser = Socialite::driver('google')->stateless()->user();
-        $user = User::where('email', $ggUser->email)->first();
+        $ggUser = Socialite::driver('google')->user();
+        $email = $ggUser->email;
+        $user = User::where('email', $email)->first();
+        
+        // Nếu user chưa tồn tại, kiểm tra domain và tạo mới
+        if (!$user) {
+            if (str_ends_with($email, '@fpt.edu.vn') || str_ends_with($email, '@fe.edu.vn')) {
+                $user = new User();
+                $user->name = $ggUser->name;
+                $user->email = $email;
+                $user->avatar = $ggUser->avatar;
+                $user->campus_id = 1; // Mặc định Toàn quốc
+                $user->save();
+                
+                // Gán quyền sinh viên cho tài khoản mới
+                $user->assignRole('student');
+            }
+        }
+
         if($user){
+            // Cập nhật avatar và tên nếu có thay đổi từ Google
             $user->avatar = $ggUser->avatar;
             $user->name = $ggUser->name;
             $user->save();
+            
             Auth::login($user);
             
-            if($user->hasAnyRole(['admin', 'giao_vu', 'teacher', 'major_head_teacher'])){
-                return redirect(route('dashboard'));
-            }
-
             if (Session::get('url_now')) { // kiểm tra xem có tồn tại url cũ không
                 $url_before = Session::get('url_now'); //lấy ra url trước khi người dùng login
                 Session::forget('url_now');
@@ -40,7 +55,8 @@ class LoginController extends Controller
                 return redirect(route('home'));
             }
         }
-        return redirect(route('login'));
+        
+        return redirect(route('login'))->with('error', 'Email không được phép đăng nhập vào hệ thống. Vui lòng sử dụng email @fpt.edu.vn hoặc @fe.edu.vn');
     }
 
 

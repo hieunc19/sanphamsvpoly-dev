@@ -58,6 +58,11 @@ License: You must have a valid license purchased only from themeforest(the above
 							</a>
 						</div>
 						<div class="m-login__signin">
+							@if(session('error'))
+								<div class="alert alert-danger">
+									{{ session('error') }}
+								</div>
+							@endif
                             <a href="{{route('gg.login')}}" style="width:100%" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
                                 <i class="socicon-google"></i> Đăng nhập bằng tài khoản Google
                             </a>
