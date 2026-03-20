@@ -12,11 +12,20 @@ class Product extends Model
     use HasFactory;
     protected $table = 'products';
     protected $fillable = [
+        'token',
         'name',
-        'url_video',
+        'code_subject',
+        'semester',
+        'teacher',
+        'score',
+        'status',
         'type_id',
+        'url_video',
+        'create_by',
         'descript_short',
         'descript_detail',
+        'document_url',
+        'view',
     ];
     public function semester_obj(){
         return $this->hasOne(Semester::class,'id','semester');

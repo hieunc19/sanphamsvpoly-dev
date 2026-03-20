@@ -40,8 +40,11 @@ class ProductDetailController extends Controller
             } else {  //driver
                 $str = $product->url_video;
                 $regex = '/.*[^-\w]([-\w]{25,})[^-\w]?.*/';
-                preg_match($regex, $str, $matches, PREG_OFFSET_CAPTURE, 0);
-                $url_video = "https://drive.google.com/file/d/".$matches[1][0]."/preview";
+                if (preg_match($regex, $str, $matches, PREG_OFFSET_CAPTURE, 0)) {
+                    $url_video = "https://drive.google.com/file/d/".$matches[1][0]."/preview";
+                } else {
+                    $url_video = $str;
+                }
             }
 
             return view('page.product.detailView',compact('product','teacher','createAt','avgStar','token','stars','myStar','similarProduct','url_video', 'evaluates'));
